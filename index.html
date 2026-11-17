@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff7f2">
+  <meta name="description" content="Un cumpleaños muy especial para Carolina, con cariño de su amigo Daniel.">
+  <title>Feliz cumpleaños, Carolina ✨</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #452c43;
+      --muted: #796675;
+      --rose: #d65b78;
+      --peach: #f5ad91;
+      --cream: #fffaf5;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 18%, #ffe1dc 0, transparent 32%),
+        radial-gradient(ellipse at 90% 72%, #f5dcef 0, transparent 34%),
+        var(--cream);
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+    }
+
+    .page {
+      position: relative;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+      padding: 52px 22px;
+      isolation: isolate;
+    }
+
+    .glow {
+      position: absolute;
+      z-index: -1;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: #ffd5c8;
+      filter: blur(80px);
+      opacity: .46;
+    }
+
+    .glow-one { top: 3%; left: -100px; }
+    .glow-two { right: -120px; bottom: 4%; background: #edc7e7; }
+
+    .card {
+      width: min(100%, 720px);
+      padding: clamp(32px, 7vw, 68px);
+      border: 1px solid rgba(255, 255, 255, .86);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, .73);
+      box-shadow: 0 24px 80px rgba(100, 54, 81, .12);
+      text-align: center;
+      backdrop-filter: blur(14px);
+      animation: arrive .8s ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--rose);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 11vw, 6.3rem);
+      font-weight: 500;
+      letter-spacing: -.065em;
+      line-height: .96;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .cake {
+      display: inline-grid;
+      width: 88px;
+      height: 88px;
+      margin: 22px 0 14px;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff0e8;
+      font-size: 2.8rem;
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    .intro {
+      max-width: 470px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.6vw, 1.14rem);
+      line-height: 1.8;
+    }
+
+    .message {
+      max-width: 540px;
+      margin: 22px auto 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.12rem, 2.8vw, 1.36rem);
+      line-height: 1.8;
+    }
+
+    .message strong { color: var(--rose); }
+
+    .signature {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .signature span {
+      color: var(--rose);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-style: italic;
+    }
+
+    .stage[hidden] { display: none; }
+
+    .stage h2 {
+      margin: 14px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 500;
+    }
+
+    .stage-copy {
+      max-width: 490px;
+      margin: 12px auto;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.7;
+    }
+
+    .wish-button,
+    .secondary-button {
+      margin-top: 32px;
+      padding: 14px 23px;
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(110deg, #d65b78, #e78d83);
+      box-shadow: 0 8px 20px rgba(214, 91, 120, .25);
+      cursor: pointer;
+      font: inherit;
+      font-size: .94rem;
+      font-weight: 650;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .wish-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(214, 91, 120, .32);
+    }
+
+    .secondary-button {
+      margin: 14px 0 0;
+      border: 1px solid #edcbd2;
+      color: var(--rose);
+      background: #fff;
+      box-shadow: none;
+    }
+
+    .wish-button:focus-visible,
+    .secondary-button:focus-visible {
+      outline: 3px solid #8e3c67;
+      outline-offset: 4px;
+    }
+
+    .status {
+      min-height: 1.6em;
+      margin: 16px auto 0;
+      color: var(--rose);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .candle-scene {
+      display: grid;
+      justify-items: center;
+      margin: 24px auto 16px;
+    }
+
+    .flame {
+      position: relative;
+      width: 25px;
+      height: 39px;
+      margin-bottom: -2px;
+      border-radius: 60% 40% 55% 45%;
+      background: linear-gradient(145deg, #fff5a8 8%, #ffb34f 55%, #f06c55 100%);
+      box-shadow: 0 0 22px 8px rgba(255, 171, 71, .35);
+      transform: rotate(4deg);
+      transition: opacity .35s ease, transform .35s ease;
+      animation: flicker .8s ease-in-out infinite alternate;
+    }
+
+    .flame::after {
+      position: absolute;
+      right: 7px;
+      bottom: 4px;
+      width: 9px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff4bc;
+      content: "";
+    }
+
+    .flame.extinguished {
+      opacity: 0;
+      transform: translate(20px, -18px) scale(.25) rotate(45deg);
+      animation: none;
+    }
+
+    .wick {
+      position: relative;
+      z-index: 1;
+      width: 4px;
+      height: 12px;
+      margin-bottom: -3px;
+      border-radius: 3px;
+      background: #694d4b;
+    }
+
+    .candle {
+      display: grid;
+      width: 86px;
+      height: 118px;
+      place-items: center;
+      border-radius: 15px 15px 8px 8px;
+      background: repeating-linear-gradient(135deg, #ee8ca0 0 14px, #fff1e9 14px 28px);
+      box-shadow: inset -8px 0 12px rgba(138, 55, 81, .12), 0 9px 18px rgba(100, 54, 81, .13);
+    }
+
+    .candle-age {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border-radius: 50%;
+      color: #b94d69;
+      background: rgba(255, 250, 245, .94);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+
+    .candle-base {
+      width: 126px;
+      height: 12px;
+      margin-top: -1px;
+      border-radius: 50%;
+      background: #f3d9d2;
+    }
+
+    .birthday-photo {
+      display: block;
+      width: min(100%, 520px);
+      max-height: 56vh;
+      margin: 24px auto 0;
+      border: 8px solid white;
+      border-radius: 18px;
+      object-fit: contain;
+      box-shadow: 0 15px 40px rgba(100, 54, 81, .2);
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #e89bad;
+      animation: twinkle 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .sparkle-a { top: 14%; right: 15%; font-size: 1.5rem; }
+    .sparkle-b { bottom: 15%; left: 13%; font-size: 1.15rem; animation-delay: .8s; }
+    .sparkle-c { top: 27%; left: 12%; font-size: .9rem; animation-delay: 1.4s; }
+
+    .confetti {
+      position: fixed;
+      z-index: 3;
+      top: -16px;
+      width: 9px;
+      height: 13px;
+      border-radius: 2px;
+      pointer-events: none;
+      animation: fall 2.8s ease-in forwards;
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .38; transform: scale(.85); }
+      50% { opacity: 1; transform: scale(1.12); }
+    }
+
+    @keyframes flicker {
+      from { transform: rotate(4deg) scale(1); }
+      to { transform: rotate(-5deg) scale(.92, 1.05); }
+    }
+
+    @keyframes fall {
+      to { transform: translate3d(var(--drift), 105vh, 0) rotate(650deg); opacity: .2; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <span class="glow glow-one" aria-hidden="true"></span>
+    <span class="glow glow-two" aria-hidden="true"></span>
+    <span class="sparkle sparkle-a" aria-hidden="true">✦</span>
+    <span class="sparkle sparkle-b" aria-hidden="true">✧</span>
+    <span class="sparkle sparkle-c" aria-hidden="true">✦</span>
+
+    <section class="card" aria-labelledby="birthday-title">
+      <p class="eyebrow">Hoy se celebra a alguien muy especial</p>
+      <h1 id="birthday-title">Feliz cumplea&ntilde;os,<span>Carolina</span></h1>
+      <div class="stage" id="welcome-stage">
+        <div class="cake" aria-hidden="true">🎂</div>
+        <p class="intro">
+          Que este nuevo a&ntilde;o te traiga momentos bonitos, muchas razones para sonre&iacute;r
+          y toda la felicidad que mereces.
+        </p>
+        <p class="message">
+          Gracias por hacerme re&iacute;r cada d&iacute;a y por ser una persona tan importante
+          para m&iacute;. A veces <strong>me da miedo perderte</strong>, porque valoro much&iacute;simo
+          tenerte en mi vida; no quiero que ese miedo te pese, solo que sepas cu&aacute;nto
+          te quiero y lo agradecido que estoy por nuestra amistad.
+        </p>
+        <p class="signature">Con todo mi cari&ntilde;o,<br><span>Daniel</span></p>
+        <button class="wish-button" id="open-surprise" type="button">Abrir mi sorpresa 🎁</button>
+      </div>
+
+      <section class="stage" id="candle-stage" aria-labelledby="candle-title" hidden>
+        <p class="eyebrow">Una sorpresa para ti</p>
+        <h2 id="candle-title" tabindex="-1">Tu vela de 17 a&ntilde;os 🕯️</h2>
+        <div class="candle-scene" role="img" aria-label="Una vela encendida con el número 17">
+          <div class="flame" id="flame" aria-hidden="true"></div>
+          <div class="wick" aria-hidden="true"></div>
+          <div class="candle" aria-hidden="true"><span class="candle-age">17</span></div>
+          <div class="candle-base" aria-hidden="true"></div>
+        </div>
+        <p class="stage-copy" id="blow-instruction" aria-live="polite">
+          Activa el micr&oacute;fono y sopla suavemente para apagar la vela.
+        </p>
+        <button class="wish-button" id="blow-button" type="button">🎙️ Activar micr&oacute;fono</button>
+        <p><button class="secondary-button" id="manual-extinguish" type="button">Apagar la vela sin micr&oacute;fono</button></p>
+      </section>
+
+      <section class="stage" id="wish-stage" aria-labelledby="wish-title" hidden>
+        <p class="eyebrow">La vela ya se apag&oacute;</p>
+        <h2 id="wish-title" tabindex="-1">Pide un deseo ✨</h2>
+        <p class="stage-copy">Cierra los ojos un momento, pide tu deseo en silencio y cuando est&eacute;s lista, sigue adelante.</p>
+        <button class="wish-button" id="reveal-photo" type="button">Ya ped&iacute; mi deseo 💖</button>
+      </section>
+
+      <section class="stage" id="photo-stage" aria-labelledby="photo-title" hidden>
+        <p class="eyebrow">Un recuerdo para ti</p>
+        <h2 id="photo-title" tabindex="-1">Con mucho cari&ntilde;o, Carolina 💖</h2>
+        <img class="birthday-photo" src="carolina.jpg" alt="Una foto especial para Carolina">
+        <p class="stage-copy">Gracias por tantas risas y por ser t&uacute;. &iexcl;Feliz cumplea&ntilde;os!</p>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const welcomeStage = document.querySelector("#welcome-stage");
+    const candleStage = document.querySelector("#candle-stage");
+    const wishStage = document.querySelector("#wish-stage");
+    const photoStage = document.querySelector("#photo-stage");
+    const blowButton = document.querySelector("#blow-button");
+    const manualExtinguishButton = document.querySelector("#manual-extinguish");
+    const blowInstruction = document.querySelector("#blow-instruction");
+    const flame = document.querySelector("#flame");
+    const colors = ["#d65b78", "#f5ad91", "#d9a7ce", "#f2cb72", "#a9cbb7"];
+    let audioStream;
+    let audioContext;
+    let animationFrame;
+
+    function showStage(stage) {
+      [welcomeStage, candleStage, wishStage, photoStage].forEach((item) => {
+        item.hidden = item !== stage;
+      });
+      stage.querySelector("h2")?.focus();
+    }
+
+    function stopMicrophone() {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      if (audioStream) audioStream.getTracks().forEach((track) => track.stop());
+      if (audioContext && audioContext.state !== "closed") audioContext.close();
+      audioStream = undefined;
+      audioContext = undefined;
+      animationFrame = undefined;
+    }
+
+    function extinguishCandle() {
+      if (flame.classList.contains("extinguished")) return;
+      stopMicrophone();
+      flame.classList.add("extinguished");
+      window.setTimeout(() => showStage(wishStage), 550);
+    }
+
+    document.querySelector("#open-surprise").addEventListener("click", () => {
+      showStage(candleStage);
+    });
+
+    document.querySelector("#reveal-photo").addEventListener("click", () => {
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        for (let i = 0; i < 48; i += 1) {
+          const piece = document.createElement("span");
+          piece.className = "confetti";
+          piece.setAttribute("aria-hidden", "true");
+          piece.style.left = `${Math.random() * 100}vw`;
+          piece.style.backgroundColor = colors[i % colors.length];
+          piece.style.setProperty("--drift", `${Math.random() * 180 - 90}px`);
+          piece.style.animationDelay = `${Math.random() * 0.65}s`;
+          document.body.append(piece);
+          piece.addEventListener("animationend", () => piece.remove(), { once: true });
+        }
+      }
+      showStage(photoStage);
+    });
+
+    manualExtinguishButton.addEventListener("click", extinguishCandle);
+
+    blowButton.addEventListener("click", async () => {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        blowInstruction.textContent = "Tu navegador no permite usar el micr&oacute;fono aqu&iacute;. Puedes apagar la vela con el otro bot&oacute;n.";
+        return;
+      }
+
+      blowButton.disabled = true;
+      blowInstruction.textContent = "Esperando permiso para usar el micrófono...";
+
+      try {
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) throw new Error("AudioContext no disponible");
+
+        audioContext = new AudioContextClass();
+        const source = audioContext.createMediaStreamSource(audioStream);
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 1024;
+        source.connect(analyser);
+        const samples = new Uint8Array(analyser.fftSize);
+        let ambientLevel = 0;
+        let startedAt;
+        let loudSince;
+
+        blowInstruction.textContent = "Ahora sopla suavemente cerca del micrófono para apagarla.";
+
+        const listenForBlow = (time) => {
+          analyser.getByteTimeDomainData(samples);
+          let sum = 0;
+          samples.forEach((sample) => {
+            const value = (sample - 128) / 128;
+            sum += value * value;
+          });
+          const level = Math.sqrt(sum / samples.length);
+
+          if (!startedAt) startedAt = time;
+          if (time - startedAt < 700) {
+            ambientLevel = Math.max(ambientLevel, level);
+          } else if (level > Math.max(0.055, ambientLevel * 2.4)) {
+            if (!loudSince) loudSince = time;
+            if (time - loudSince > 300) {
+              extinguishCandle();
+              return;
+            }
+          } else {
+            loudSince = undefined;
+          }
+
+          animationFrame = requestAnimationFrame(listenForBlow);
+        };
+
+        animationFrame = requestAnimationFrame(listenForBlow);
+      } catch (error) {
+        stopMicrophone();
+        blowButton.disabled = false;
+        blowInstruction.textContent = "No se pudo activar el micrófono. Revisa el permiso del navegador o apaga la vela con el otro botón.";
+      }
+    });
+  </script>
+</body>
+</html>
